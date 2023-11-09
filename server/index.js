@@ -1,4 +1,4 @@
-import  express  from "express";
+import  express  from "express"; //time to continew 1:13;24
 import bodyParser  from "body-parser";
 import  mongoose  from "mongoose";
 import cors  from "cors";
@@ -6,9 +6,13 @@ import  multer  from "multer";
 import helmet from "helmet";
 import  morgan  from "morgan";
 import  path  from "path";
-import { fileURLToPath } from "url";
+import  fileURLToPath  from "url";
 import dotenv from "dotenv";
-import  createBrotliCompress  from "zlib";
+import  userRoutes  from "./routes/users.js";
+import authRouters from "./routes/auth.js"
+import  register  from "./controllers/auth.js";
+import postRoutes  from "./routes/posts.js";
+
 
 /* configrations */
 const __filename =fileURLToPath(import.meta.url);
@@ -23,8 +27,6 @@ app.use(bodyParser.json({limit: "30mb",extended: true}));
 app.use(bodyParser.urlencoded({limit:"30mb",extended:true}))
 app.use(cors());
 app.use("/assets",express.static(path.join(__dirname,'public/assets')));
-import { register } from "./controllers/auth.js";
-import authRouter from "./routes/"
 
 /* flie storage */
 const storage =multer.diskStorage({
@@ -38,9 +40,12 @@ const storage =multer.diskStorage({
 const upload =multer({storage});
 
 /* routes with files */
-app.post("/auth/register",upload.single("picture"))
+app.post("/auth/register",upload.single("picture"),register);
 
-
+/*routes */
+app.use("/auth",authRouters);
+app.use("/users",userRoutes);
+app.use("posts",postRoutes)
 
 /* Mongoose setup*/
 const PORT =process.env.PORT || 6001;
