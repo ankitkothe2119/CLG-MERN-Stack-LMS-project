@@ -1,5 +1,5 @@
+import Post from "../models/Post.js";
 import User from "../models/User.js";
-import Post from "../models/post.js";
 
 /* create */
 export const createPost = async (req, res) => {
@@ -61,7 +61,7 @@ export const getUserPosts =async (req, res) =>{
             post.likes.set(userId, true);
         }
 
-        const upsatedPost = await Post.fingByIdAndUpdate(
+        const updatedPost = await Post.fingByIdAndUpdate(
             id,
             {likes: post.likes },
             {new: true}

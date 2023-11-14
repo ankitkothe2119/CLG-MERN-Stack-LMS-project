@@ -15,6 +15,7 @@ export const register = async (req, res) => {
       location,
       occupation,
     } = req.body;
+
     const salf =await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salf)
 
@@ -22,7 +23,7 @@ export const register = async (req, res) => {
         firstname,
         lastName,
         email,
-        password:passwordHash,
+        password: passwordHash,
         picturePath,
         friends,
         location,
@@ -55,4 +56,4 @@ export const login =async (req, res) =>{
   } catch (err){
     res.status(500).json({error:err.message});
   }
-}
+};
