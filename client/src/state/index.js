@@ -10,7 +10,7 @@ const initialState = {
 export const authSlice = createSlice({
         name: "auth",
         initialState,
-        reducers: {
+        reducers: { //ligth and dark mode
             setMode: (state)=> {
                 state.mode = state.mode === "ligth" ? "dark" : "light";
             },
@@ -29,7 +29,7 @@ export const authSlice = createSlice({
                     console.error("user friends non-existent :(")
                 }
             },
-            setPosts : (state,action) => {
+            setPosts : (state, action) => {
                 state.posts =action.payload.posts;
             },
             setPost: (state, action) => {
